@@ -49,6 +49,9 @@ jobs:
       - name: Install GNU make
         run: brew install make
 
+      - name: Install ldid
+        run: brew install ldid
+
       - name: Build for ${{ matrix.platform_name }}
         run: |
           export PATH=/opt/homebrew/bin:$PATH
