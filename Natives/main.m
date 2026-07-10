@@ -223,7 +223,6 @@ void init_setupMultiDir() {
 
 
     NSArray *dirsToCreate = @[
-        [NSString stringWithFormat:@"%s/.demo", home],
         [NSString stringWithFormat:@"%s/java_runtimes", home],
         lasmPath.stringByDeletingLastPathComponent,
         multidirPath

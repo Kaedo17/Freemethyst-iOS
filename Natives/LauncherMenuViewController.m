@@ -75,7 +75,7 @@
      (id)[LauncherMenuCustomItem
           title:localize(@"launcher.menu.execute_jar", nil)
           imageName:@"MenuInstallJar" action:^{
-        [contentNavigationController performSelector:@selector(enterModInstaller)];
+    [contentNavigationController performSelector:@selector(enterModInstaller)];
     }]];
     
     // TODO: Finish log-uploading service integration
@@ -286,23 +286,13 @@
         return;
     }
 
-    // Remove the prefix "Demo." if there is
-    BOOL isDemo = [selected[@"username"] hasPrefix:@"Demo."];
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:[selected[@"username"] substringFromIndex:(isDemo?5:0)]];
-
-    // Check if we're switching between demo and full mode
-    BOOL shouldUpdateProfiles = (getenv("DEMO_LOCK")!=NULL) != isDemo;
+    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:selected[@"username"]];
 
     // Reset states
-    unsetenv("DEMO_LOCK");
     setenv("POJAV_GAME_DIR", [NSString stringWithFormat:@"%s/Library/Application Support/minecraft", getenv("POJAV_HOME")].UTF8String, 1);
 
     id subtitle;
-    if (isDemo) {
-        subtitle = localize(@"login.option.demo", nil);
-        setenv("DEMO_LOCK", "1", 1);
-        setenv("POJAV_GAME_DIR", [NSString stringWithFormat:@"%s/.demo", getenv("POJAV_HOME")].UTF8String, 1);
-    } else if (selected[@"xboxGamertag"] == nil) {
+    if (selected[@"xboxGamertag"] == nil) {
         subtitle = localize(@"login.option.local", nil);
     } else {
         // Display the Xbox gamertag for online accounts
@@ -327,10 +317,9 @@
     [self.accountButton sizeToFit];
 
     // Update profiles and local version list if needed
-    if (shouldUpdateProfiles) {
-        [contentNavigationController fetchLocalVersionList];
-        [contentNavigationController performSelector:@selector(reloadProfileList)];
-    }
+    // Refresh profiles on account change
+    [contentNavigationController fetchLocalVersionList];
+    [contentNavigationController performSelector:@selector(reloadProfileList)];
 
     // Update tableView whenever we have
     UITableViewController *tableVC = contentNavigationController.viewControllers.lastObject;

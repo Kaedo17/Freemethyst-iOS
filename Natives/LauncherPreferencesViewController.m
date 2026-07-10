@@ -127,32 +127,6 @@
                   [self.tableView reloadData];
               }
             },
-            @{@"key": @"erase_demo_data",
-              @"icon": @"trash",
-              @"type": self.typeButton,
-              @"enableCondition": ^BOOL(){
-                  NSString *demoPath = [NSString stringWithFormat:@"%s/.demo", getenv("POJAV_HOME")];
-                  int count = [NSFileManager.defaultManager contentsOfDirectoryAtPath:demoPath error:nil].count;
-                  return whenNotInGame() && count > 0;
-              },
-              @"showConfirmPrompt": @YES,
-              @"destructive": @YES,
-              @"action": ^void(){
-                  NSString *demoPath = [NSString stringWithFormat:@"%s/.demo", getenv("POJAV_HOME")];
-                  NSError *error;
-                  if([NSFileManager.defaultManager removeItemAtPath:demoPath error:&error]) {
-                      [NSFileManager.defaultManager createDirectoryAtPath:demoPath
-                                              withIntermediateDirectories:YES attributes:nil error:nil];
-                      [NSFileManager.defaultManager changeCurrentDirectoryPath:demoPath];
-                      if (getenv("DEMO_LOCK")) {
-                          [(LauncherNavigationController *)self.navigationController fetchLocalVersionList];
-                      }
-                  } else {
-                      NSLog(@"Error in erase_demo_data: %@", error);
-                      showDialog(localize(@"Error", nil), error.localizedDescription);
-                  }
-              }
-            }
         ], @[
             // Video and renderer settings
             @{@"icon": @"video"},

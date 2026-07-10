@@ -193,12 +193,10 @@ typedef void(^XSTSCallback)(NSString *xsts, NSString *uhs);
         NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
         NSDictionary *errorDict = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
         if ([errorDict[@"error"] isEqualToString:@"NOT_FOUND"]) {
-            // If there is no profile, use the Xbox gamertag as username with Demo mode
+            // If there is no profile, use the Xbox gamertag as username
             self.authData[@"profileId"] = @"00000000-0000-0000-0000-000000000000";
-            self.authData[@"username"] = [NSString stringWithFormat:@"Demo.%@", self.authData[@"xboxGamertag"]];
 
             if ([self saveChanges]) {
-                callback(@"DEMO", YES);
                 callback(nil, YES);
             } else {
                 callback(nil, NO);

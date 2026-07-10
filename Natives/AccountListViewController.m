@@ -64,11 +64,7 @@
     NSDictionary *selected = self.accountList[indexPath.row];
     // By default, display the saved username
     cell.textLabel.text = selected[@"username"];
-    if ([selected[@"username"] hasPrefix:@"Demo."]) {
-        // Remove the prefix "Demo."
-        cell.textLabel.text = [selected[@"username"] substringFromIndex:5];
-        cell.detailTextLabel.text = localize(@"login.option.demo", nil);
-    } else if (selected[@"xboxGamertag"] == nil) {
+    if (selected[@"xboxGamertag"] == nil) {
         cell.detailTextLabel.text = localize(@"login.option.local", nil);
     } else {
         // Display the Xbox gamertag for online accounts
@@ -218,9 +214,6 @@
                 [self addActivityIndicatorTo:sender];
             });
             id callback = ^(id status, BOOL success) {
-                if ([status isKindOfClass:NSString.class] && [status isEqualToString:@"DEMO"] && success) {
-                    showDialog(localize(@"login.warn.title.demomode", nil), localize(@"login.warn.message.demomode", nil));
-                }
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     [self callbackMicrosoftAuth:status success:success forCell:sender];
                 });

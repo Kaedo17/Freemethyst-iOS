@@ -150,11 +150,11 @@ typedef NS_ENUM(NSUInteger, LauncherProfilesTableSection) {
 }
 
 - (void)setupInstanceCell:(UITableViewCell *) cell atRow:(NSInteger)row {
-    cell.userInteractionEnabled = !getenv("DEMO_LOCK");
+    cell.userInteractionEnabled = YES;
     if (row == 0) {
         cell.imageView.image = [UIImage systemImageNamed:@"folder"];
         cell.textLabel.text = localize(@"preference.title.game_directory", nil);
-        cell.detailTextLabel.text = getenv("DEMO_LOCK") ? @".demo" : getPrefObject(@"general.game_directory");
+        cell.detailTextLabel.text = getPrefObject(@"general.game_directory");
     } else {
         NSString *imageName;
         if (@available(iOS 15.0, *)) {

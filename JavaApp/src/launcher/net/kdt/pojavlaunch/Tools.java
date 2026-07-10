@@ -77,7 +77,7 @@ public final class Tools {
     }
 
     public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo) {
-        String username = profile.username.replace("Demo.", "");
+        String username = profile.username;
         String versionName = versionInfo.id;
         if (versionInfo.inheritsFrom != null) {
             versionName = versionInfo.inheritsFrom;
@@ -153,9 +153,6 @@ public final class Tools {
 
     private static String[] splitAndFilterEmpty(String argStr, MinecraftAccount profile) {
         List<String> strList = new ArrayList<String>();
-        if(profile.username.startsWith("Demo.")) {
-            strList.add("--demo");
-        }
         for (String arg : argStr.split(" ")) {
             if (!arg.isEmpty()) {
                 strList.add(arg);
