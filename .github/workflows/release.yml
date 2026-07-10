@@ -75,6 +75,9 @@ jobs:
           branch: buildjre17-21
           name: jre21-ios-aarch64
 
+      - name: Install GNU make
+        run: brew install make
+
       - name: Build for ${{ matrix.platform_name }}
         run: |
           export PATH=/opt/homebrew/bin:$PATH

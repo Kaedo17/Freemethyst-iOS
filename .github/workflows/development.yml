@@ -40,6 +40,9 @@ jobs:
           path: gl4es/libs
           key: gl4es-holy-ios-shared-2-${{ steps.gl4es-sha.outputs.sha }}
 
+      - name: Install GNU make
+        run: brew install make
+
       - name: Build for ${{ matrix.platform_name }}
         run: |
           export PATH=/opt/homebrew/bin:$PATH
