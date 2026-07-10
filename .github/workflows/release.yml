@@ -33,36 +33,6 @@ jobs:
           path: gl4es/libs
           key: gl4es-holy-ios-shared-2-${{ steps.gl4es-sha.outputs.sha }}
 
-      - name: Get JRE8
-        uses: dawidd6/action-download-artifact@v21
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          workflow: build.yml
-          workflow_conclusion: success
-          path: depends
-          name: jre8-ios-aarch64
-
-      - name: Get JRE17
-        uses: dawidd6/action-download-artifact@v21
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          workflow: build.yml
-          workflow_conclusion: success
-          path: depends
-          name: jre17-ios-aarch64
-
-      - name: Get JRE21
-        uses: dawidd6/action-download-artifact@v21
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          workflow: build.yml
-          workflow_conclusion: success
-          path: depends
-          name: jre21-ios-aarch64
-
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
@@ -78,7 +48,6 @@ jobs:
       - name: Build for ${{ matrix.platform_name }}
         run: |
           export PATH=/opt/homebrew/bin:$PATH
-          export RUNNER=1
           export BOOTJDK="$JAVA_HOME/bin"
           gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} BOOTJDK=$BOOTJDK
           gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1 BOOTJDK=$BOOTJDK
