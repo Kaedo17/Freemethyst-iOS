@@ -48,7 +48,6 @@ jobs:
       - name: Build for ${{ matrix.platform_name }}
         run: |
           export PATH=/opt/homebrew/bin:$PATH
-          export RUNNER=1
           export BOOTJDK="$JAVA_HOME/bin"
           gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} BOOTJDK=$BOOTJDK
           gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1 BOOTJDK=$BOOTJDK
