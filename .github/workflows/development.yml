@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: "8"
-          distribution: "temurin"
+          distribution: "zulu"
 
       - name: Install GNU make
         run: brew install make
