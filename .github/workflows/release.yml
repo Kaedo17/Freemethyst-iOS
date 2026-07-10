@@ -43,36 +43,30 @@ jobs:
         uses: dawidd6/action-download-artifact@v21
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
-          workflow: build.yml
-          path: depends
-          workflow_conclusion: success
-          allow_forks: false
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre8
+          workflow: build.yml
+          workflow_conclusion: success
+          path: depends
           name: jre8-ios-aarch64
 
       - name: Get JRE17
         uses: dawidd6/action-download-artifact@v21
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
-          workflow: build.yml
-          path: depends
-          workflow_conclusion: success
-          allow_forks: false
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre17-21
+          workflow: build.yml
+          workflow_conclusion: success
+          path: depends
           name: jre17-ios-aarch64
 
       - name: Get JRE21
         uses: dawidd6/action-download-artifact@v21
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
-          workflow: build.yml
-          path: depends
-          workflow_conclusion: completed
-          allow_forks: false
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre17-21
+          workflow: build.yml
+          workflow_conclusion: completed
+          path: depends
           name: jre21-ios-aarch64
 
       - name: Set up JDK 8
