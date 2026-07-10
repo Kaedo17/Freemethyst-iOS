@@ -59,7 +59,7 @@ jobs:
           github_token: ${{secrets.GITHUB_TOKEN}}
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
           workflow: build.yml
-          workflow_conclusion: completed
+          workflow_conclusion: success
           path: depends
           name: jre21-ios-aarch64
 
