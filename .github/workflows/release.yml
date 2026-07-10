@@ -88,13 +88,14 @@ jobs:
         run: |
           export PATH=/opt/homebrew/bin:$PATH
           export RUNNER=1
+          export BOOTJDK="$JAVA_HOME/bin"
           if [ "${{ matrix.platform_name }}" == "ios" ]; then
-            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }}
-            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1
+            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} BOOTJDK=$BOOTJDK
+            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1 BOOTJDK=$BOOTJDK
           elif [ "${{ matrix.platform_name }}" == "tvos" ]; then
-            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1
+            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1 BOOTJDK=$BOOTJDK
           else
-            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }}
+            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} BOOTJDK=$BOOTJDK
           fi
 
       - name: Upload regular ipa
