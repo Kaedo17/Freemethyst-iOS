@@ -75,6 +75,12 @@ jobs:
           branch: buildjre17-21
           name: jre21-ios-aarch64
 
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: "8"
+          distribution: "temurin"
+
       - name: Install GNU make
         run: brew install make
 
