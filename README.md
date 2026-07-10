@@ -1,22 +1,28 @@
-# Angel Aura Amethyst (iOS)
-[![Development build](https://github.com/AngelAuraMC/Amethyst-iOS/actions/workflows/development.yml/badge.svg?branch=main)](https://github.com/AngelAuraMC/Amethyst-iOS/actions/workflows/development.yml)
-[![Crowdin](https://badges.crowdin.net/angelauramc/localized.svg)](https://crowdin.com/project/angelauramc)
-[![Discord](https://img.shields.io/discord/724163890803638273.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5ptqkyZxEy)
+# Freemethyst (iOS)
+[![Development build](https://github.com/Kaedo17/Freemethyst-iOS/actions/workflows/development.yml/badge.svg?branch=main)](https://github.com/Kaedo17/Freemethyst-iOS/actions/workflows/development.yml)
 
+Freemethyst is a fork of [Amethyst](https://github.com/AngelAuraMC/Amethyst-iOS), a Minecraft: Java Edition launcher for iOS and iPadOS, based off of zhuowei's [Boardwalk](https://github.com/zhuowei/Boardwalk) project. This fork removes the offline/demo account restriction and adds Java 25 support for Minecraft 26.x.
 
+## What's different from Amethyst
 
-## Introduction
-Amethyst is a Minecraft: Java Edition launcher for Android, iOS, and iPadOS, based off of zhuowei's [Boardwalk](https://github.com/zhuowei/Boardwalk) project.
-* Supports most versions of Minecraft: Java Edition, from the very first beta to the newest snapshots.
-* Supports Forge, Fabric, OptiFine, and Quilt for you to customize the experience with supported mods.
-* Includes customizable on-screen controls, keyboard and mouse support, and game controller support.
-* Optimized for jailbroken and TrollStore devices to enable better capabilities.
-* Microsoft account and demo mode support for logging into Minecraft.
-* ...and much more!
+- **No offline/demo account restriction** — all accounts can play the full game without demo mode limits
+- **Java 25 support** — run the latest Minecraft 26.x versions that require Java 25
+- **CI runs on free GitHub Actions runners** — no MacStadium dependency
+- **Updated CI with modern Node.js** — `set-output` replaced with `$GITHUB_OUTPUT`, actions updated
 
-This repository contains the code for our iOS and iPadOS port of Amethyst. Looking for [Android?](https://github.com/AngelAuraMC/Amethyst-Android)
+## Features
 
-## Getting started with Amethyst
+- Supports most versions of Minecraft: Java Edition, from the very first beta to the newest snapshots.
+- Supports Forge, Fabric, OptiFine, and Quilt for you to customize the experience with supported mods.
+- Includes customizable on-screen controls, keyboard and mouse support, and game controller support.
+- Optimized for jailbroken and TrollStore devices to enable better capabilities.
+- Microsoft account and local account support for logging into Minecraft.
+- ...and much more!
+
+This repository contains the code for our iOS and iPadOS port. Looking for [Android?](https://github.com/AngelAuraMC/Amethyst-Android)
+
+## Getting started with Freemethyst
+
 The [Amethyst wiki](https://wiki.angelauramc.dev/wiki/getting_started/INSTALL.html#ios) has extensive documentation on how to install, set up, and play! For those who wish to install quickly, here's the basics:
 
 ### Requirements
@@ -39,32 +45,27 @@ Recommended devices provide a smoother and more enjoyable gameplay experience co
 - iOS 17.x and iOS 18.x is supported. However, a computer is required. For more information, please check out [the official wiki](https://wiki.angelauramc.dev/wiki/faq/ios/JIT.html#what-are-the-methods-to-enable-jit)
 
 ### Setting up to sideload
-Amethyst can be sideloaded in many ways. Our recommended solution is to install [TrollStore](https://github.com/opa334/TrollStore) if your iOS version supports it. Installing with TrollStore allows you to permanently sign the application, automatically enable JIT, and increase memory limits.
+Freemethyst can be sideloaded in many ways. Our recommended solution is to install [TrollStore](https://github.com/opa334/TrollStore) if your iOS version supports it. Installing with TrollStore allows you to permanently sign the application, automatically enable JIT, and increase memory limits.
 
 If you cannot, [AltStore](https://altstore.io) and [SideStore](https://sidestore.io) are your next best options.
-- Signing services that do not use your UDID (and use distribution certificates) are not supported, as Amethyst requires capabilities they do not allow. However, if you do managed to gain access to a Development certificate, due to it having the necessary entitlement (being com.apple.security.get-task-allow) to attach a debugger to the running process (enabling JIT), you may use a Development certificate.
+- Signing services that do not use your UDID (and use distribution certificates) are not supported, as Freemethyst requires capabilities they do not allow. However, if you do managed to gain access to a Development certificate, due to it having the necessary entitlement (being com.apple.security.get-task-allow) to attach a debugger to the running process (enabling JIT), you may use a Development certificate.
   
-- Only install sideloading software and Amethyst from trusted sources. We are not responsible for any harm caused by using unofficial software.
+- Only install sideloading software and Freemethyst from trusted sources. We are not responsible for any harm caused by using unofficial software.
 - Jailbreaks also benefit from permenant signing, autoJIT, and increased memory limits. However, we do not recommend them on devices intended for regular use.
 
-### Installing Amethyst
-#### Release build (TrollStore)
-1. Download an IPA of Amethyst in [Releases](https://github.com/AngelAuraMC/Amethyst-iOS/releases).
-2. Open the package in TrollStore using the share menu.
-
-#### Release build (AltStore/SideStore trusted source)
-These builds will be available soon, stay tuned.
+### Installing Freemethyst
+#### Build from source
+1. Clone the repository and its submodules.
+2. Run `gmake dsym package PLATFORM=2` to build for iOS.
+3. Find the IPA in the `artifacts/` directory.
 
 #### Nightly builds
 *These builds can contain game-breaking bugs. Use with caution.*
-1. Download an IPA build of Amethyst in the [Actions tab](https://github.com/AngelAuraMC/Amethyst-iOS/actions).
+1. Download an IPA build of Freemethyst in the [Actions tab](https://github.com/Kaedo17/Freemethyst-iOS/actions).
 2. Open the downloaded IPA in your sideloading app to install.
 
-#### Nightly builds (AltStore/SideStore trusted sources)
-These builds will be available soon, stay tuned.
-
 ### Enabling JIT
-Amethyst makes use of **just-in-time compilation**, or JIT, to provide usable speeds for the end user. JIT is not supported on iOS without the application being debugged, so workarounds are required to enable it. You can use this chart to determine the best solution for you and your setup.
+Freemethyst makes use of **just-in-time compilation**, or JIT, to provide usable speeds for the end user. JIT is not supported on iOS without the application being debugged, so workarounds are required to enable it. You can use this chart to determine the best solution for you and your setup.
 | Application         | AltStore | SideStore | StikDebug | TrollStore | Jitterbug          | Jailbroken |
 |---------------------|----------|-----------|-----------|------------|--------------------|------------|
 | Requires ext-device | Yes      | Yes (#)   | Yes (#)   | No         | If VPN unavailable | No         |
@@ -74,8 +75,17 @@ Amethyst makes use of **just-in-time compilation**, or JIT, to provide usable sp
 (*) AltServer running on the local network is required.
 (#) Only the first time.
 
+## Java runtimes
+Freemethyst bundles the following Java runtimes for iOS aarch64:
+- **Java 8** for older Minecraft versions
+- **Java 17** for Minecraft 1.18–1.20
+- **Java 21** for Minecraft 1.21
+- **Java 25** for Minecraft 26.x (downloaded from [vibecodest/Amethyst-iOS](https://github.com/vibecodest/Amethyst-iOS) releases)
+
 ## Contributors
-Amethyst is amazing, and surprisingly stable, and it wouldn't be this way without the commmunity that helped and contribute to the project! Some notable names:
+Freemethyst is a fork of Amethyst by @crystall1nedev and the Amethyst team. JRE 25 support is based on work from [catsruledogs/Amethyst-iOS-25](https://github.com/catsruledogs/Amethyst-iOS-25) and [vibecodest/Amethyst-iOS](https://github.com/vibecodest/Amethyst-iOS).
+
+Notable names from the original Amethyst project:
 
 @crystall1nedev - Project manager, iOS port developer  
 @khanhduytran0 - iOS port developer  
