@@ -7,16 +7,13 @@ jobs:
   build:
     name: Release build
     strategy:
+      fail-fast: false
       matrix:
         include:
           - platform: 2
             platform_name: ios
           - platform: 3
             platform_name: tvos
-          - platform: 7
-            platform_name: iossimulator
-          - platform: 8
-            platform_name: tvossimulator
 
     runs-on: macos-latest
     steps:
