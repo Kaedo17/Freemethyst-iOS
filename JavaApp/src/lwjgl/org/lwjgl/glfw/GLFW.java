@@ -1357,4 +1357,9 @@ public class GLFW
         // Fast path, but will return true if one has the same prefix
         return glGetString(GL_EXTENSIONS).contains(ext);
     }
+
+    @NativeType("int")
+    public static boolean glfwPlatformSupported(int platform) {
+        return true;
+    }
 }
